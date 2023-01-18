@@ -1,0 +1,43 @@
+Training images to create custom embeddings on Automatic 1111 Web UI with Textual Inversion
+
+1.
+
+Start with 10+ decent quality pictures that include only the subject you wish to train,
+the more the better.
+
+It may help to train using the full version 1.5 model, which is named "v1-5-pruned.ckpt" and is around 8GB.
+
+Under the Train tab in the Web UI go to "Create Embedding" and choose a file "Name" for the embedding, and a prompt name under "Initialization Text".
+
+Choose 1-8 vectors, experiment to see which is most suitable.
+Finally Create embedding.
+
+2.
+
+Under "Preprocess Images" select the directory with your images as the source,
+and another directory as the output.
+
+Choosing "Create flipped copies" just flips the images so that they are different.
+Choosing "Use BLIP for caption" to interrogate the images and name them accordingly.
+Finally Preprocess.
+
+3.
+
+Select your embedding.
+Embedding Learning rate can be from 0.01 to 0.005, experiment to see what works best.
+Choose the directory with your processed images.
+For template file, choose subject or style if you are training a thing or a style of art.
+If you used BLIP to caption the images, use the _filewords file.
+
+For Maximum steps select between 3000-6000 steps.
+For save an image every N steps, use 0 - this can cause CUDA memory errors.
+For save a copy of embedding every N steps, choose 1000 or another rounded number.
+This creates a checkmark file every N steps, which is useful to see which number of steps are best for this embedding.
+
+4.
+
+Yeet that shit;
+
+The template files are under [webui]\textual_inversion_templates, it might be a good idea to browse them, and perhaps create a custom template.
+
+The embedding checkpoints are saved in [webui]\textual_inversion\[YYYY-MM-DD]\embeddings, and automatically copied to [webui]\embeddings
