@@ -1,0 +1,165 @@
+Guide to models and embedding:
+
+References:
+https://rentry.org/safetensorsguide
+https://huggingface.co
+https://civitai.com/
+
+See safetensors.txt for information on how to convert pickle archives to safetensors
+
+Stable Diffusion Official Checkpoints:
+
+https://huggingface.co/CompVis/stable-diffusion-v-1-4-original
+https://huggingface.co/runwayml/stable-diffusion-v1-5
+https://huggingface.co/runwayml/stable-diffusion-inpainting
+https://huggingface.co/stabilityai/stable-diffusion-2
+https://huggingface.co/stabilityai/stable-diffusion-2-1-base
+
+Guide to 2.1 installation including yaml files:
+https://stable-diffusion-art.com/install-stable-diffusion-2-1/
+
+Analog Diffusion
+  Filename: analog-diffusion-1.0.ckpt
+  URL: https://huggingface.co/wavymulder/Analog-Diffusion
+  Keywords: In your prompt, use the activation token: analog style
+  Description:
+    This is a dreambooth model trained on a diverse set of analog photographs.
+    You may need to use the words blur haze naked in your negative prompts. My dataset did not include any NSFW material but the model seems to be pretty horny. Note that using blur and haze in your negative prompt can give a sharper image but also a less pronounced analog film effect
+
+Anything V3
+  Filename: Anything-V3.0-pruned-fp16.ckpt
+  URL: https://huggingface.co/Linaqruf/anything-v3.0
+  Keywords: see site
+  Description:
+    Welcome to Anything V3 - a latent diffusion model for weebs. This model is intended to produce high-quality, highly detailed anime style with just a few prompts. Like other anime-style Stable Diffusion models, it also supports danbooru tags to generate images.
+
+Clayitization
+  Filename: jakSClayitizationIma_clayitizationSd21768.ckpt (requires yaml)
+  URL: https://civitai.com/models/1538/jaks-clayitization-image-pack
+  Keywords: Use Prompt: "clayitization" in the beginning of your prompt followed by a word. 
+  Description:
+    From the makers of Woolitize, another versatile Jak Texture Pack is available to help unleash your Clay-itivity!
+
+Clazy
+  Filename: clazy_clazy2600.ckpt
+  URL: https://civitai.com/models/82/clazy
+  Keywords: Use "clazy style" (without quotation marks) in prompt for the model to kick-in.
+  Description:
+    "This is Clazy! a new model I trained using Shivam's repo of Dreambooth. Use "clazy style" (without quotation marks) in prompt for the model to kick-in. At the moment need more finetuning, seems to have problems with mouths. Put "open mouth" in the negative prompt to mitigate this effect. It should work with animals too, but since it was trained on human subjects you need to add brackets. Like this for example: [clazy style:10] where 10 is the sample you want the model to kick-in, the first 10 samples will be dedicated to generate some noise of the actual animal. Also you can use this to generate better likeness on some subjects if you aren't satisfied with the results. Use a CFG scale between 3 and 7 to obtain a smoother model, raise the steps number accordingly (between 20 and 50 should be enough)."
+
+Disco Diffusion
+https://huggingface.co/sd-dreambooth-library/disco-diffusion-style
+
+Epic Diffusion
+https://huggingface.co/johnslegers/epic-diffusion
+
+-Protogen
+https://civitai.com/user/darkstorm2150
+
+Macro Diffusion
+https://civitai.com/models/3863/macro-diffusion
+
+Midjourney Graffiti
+https://huggingface.co/ShadoWxShinigamI/midjourney-graffiti
+in the style of mdjrny-grfft 
+
+Inkpunk Diffusion
+https://huggingface.co/Envvi/Inkpunk-Diffusion
+nvinkpunk 
+
+Gigafractal
+https://civitai.com/models/1193/gigafractal-diffusion-sd15
+gigafractal artstyle
+
+Trinart
+https://huggingface.co/naclbit/trinart_stable_diffusion_v2
+
+VoxelArt
+https://huggingface.co/Fictiverse/Stable_Diffusion_VoxelArt_Model
+VoxelArt 
+
+Uber Realistic Porn Merge
+https://civitai.com/models/2661/uber-realistic-porn-merge-urpm
+
+Models:
+
+Comic Diffusion
+  Filename: comic-diffusion.ckpt (also available for 2.x)
+  URL: https://huggingface.co/ogkalu/Comic-Diffusion
+  Keywords: (charliebo|holliemengert|marioalberti|pepelarraz|andreasrocha|jamesdaly) artstyle
+  Description: 
+    Trained on 6 styles at once, it allows anyone to create unique but consistent styles by mixing any number of the tokens. Even changing the order of the same list influences results so there's a lot to experiment with here. This was created so anyone could create their comic projects with ease and flexibility. It is the culmination of all my experimentation with dreambooth thus far.
+
+Cyberpunk Anime Diffusion
+  Filename: Cyberpunk-Anime-Diffusion.ckpt
+  URL: https://huggingface.co/DGSpitzer/Cyberpunk-Anime-Diffusion
+  Keywords: After model loaded, use keyword dgs in your prompt, with illustration style to get even better results.
+  Description:  
+    An AI model that generates cyberpunk anime characters!~
+
+Dreamlike Diffusion
+  Filename: dreamlike-diffusion-1.0.ckpt
+  URL: https://huggingface.co/dreamlike-art/dreamlike-diffusion-1.0
+  Keywords: dreamlikeart
+  Description:
+    Use the same prompts as you would for SD 1.5. Add dreamlikeart if the artstyle is too weak.
+    Non-square aspect ratios work better for some prompts. If you want a portrait photo, try using a 2:3 or a 9:16 aspect ratio. If you want a landscape photo, try using a 3:2 or a 16:9 aspect ratio.
+    Use slightly higher resolution for better results: 640x640px, 512x768px, 768x512px, etc.
+
+F222
+  Filename: f222.ckpt
+  URL: https://huggingface.co/acheong08/f222 (discontinued) 
+  Keywords: https://www.youtube.com/watch?v=EZ3ovOiJmPo
+  Description: Realistic NSFW model from ai.zephyr.com
+
+Jak's Voxel-ish Image Pack
+  Filename: voxelish.ckpt
+  URL: https://civitai.com/models/1086/jaks-voxel-ish-image-pack
+  Keywords: voxel-ish  (Tip: add "intricate detail" in prompt to make a semi-realistic image.)
+  Description:
+    Another fantastic image pack brought to you by 182 training images through 8000 training steps, 20% Training text crafted by Jak_TheAI_Artist
+
+Jak's Woolitize Image Pack v.1.2 for Stable Diffusion 1.5
+  Filename: woolitize768.ckpt
+  URL: https://huggingface.co/plasmo/woolitize-768sd1-5
+  Keywords: Include Prompt trigger: "woolitize" to activate.
+  Description:
+    Woolitize Image Pack brought to you using 117 training images (768 resolution) through 8000 training steps, 20% Training text crafted by Jak_TheAI_Artist
+ 
+Hassanblend
+  Filename: HassanBlend1.4.ckpt
+  URL: https://huggingface.co/hassanblend/hassanblend1.4
+  Keywords: see site
+  Description:
+    I am hassan, I created HassansBlend, the latest version currently is 1.4. I continue to iterate and improve on this model over time. Feel free to check out our discord or rentry page for more examples with prompts and outputs generated.
+
+Mo Di Diffusion
+  Filename: moDi-v1-pruned.ckpt
+  URL: https://huggingface.co/nitrosocke/mo-di-diffusion
+  Keywords: see description
+  Description:
+    This is the fine-tuned Stable Diffusion 1.5 model trained on screenshots from a popular animation studio. Use the tokens modern disney style in your prompts for the effect.
+
+OpenJourney
+  Filename: mdjrny-v4.ckpt
+  URL: https://huggingface.co/prompthero/openjourney
+  Keywords: mdjrny-v4 style
+  Description:
+    Openjourney is an open source Stable Diffusion fine tuned model on Midjourney images, by PromptHero
+
+PaperCut model V1
+  Filename: PaperCut_v1.ckpt
+  URL: https://huggingface.co/Fictiverse/Stable_Diffusion_PaperCut_Model
+  Keywords: Use PaperCut in your prompts
+  Description:
+    This is the fine-tuned Stable Diffusion model trained on Paper Cut images.
+
+Robo Diffusion
+  Filename: robo-diffusion-v1.ckpt (also available for 2.x)
+  URL: https://huggingface.co/nousr/robo-diffusion
+  Keywords: Keep the words nousr robot towards the beginning of your prompt to invoke the finetuned style.
+  Description:
+    A dreambooth-method finetune of stable diffusion that will output cool looking robots when prompted.
+
+Embeddings:
+
