@@ -1,0 +1,6 @@
+The script available from https://gist.github.com/xrpgame/8f756f99b00b02697edcd5eec5202c59
+will convert .ckpt files to .safetensor files, which load 10 times faster!
+
+References:
+https://www.reddit.com/r/StableDiffusion/comments/z8mnak/switching_models_too_slow_in_automatic1111_use/
+https://www.reddit.com/r/StableDiffusion/comments/zhozkz/safe_stable_ckpt2safetensors_conversion_toolgui/
