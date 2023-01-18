@@ -1,0 +1,5 @@
+Euler a, Euler, LMS, Heun, DPM2, DPM2 a, DPM++ 2S a, DPM++ 2M, DPM++ SDE, DPM fast, DPM adaptive, LMS Karras, DPM2 Karras, DPM2 a Karras, DPM++ 2S a Karras, DPM++ 2M Karras, DPM++ SDE Karras, DDIM, PLMS
+
+Reference:
+https://www.reddit.com/r/StableDiffusion/comments/zgu6wd/can_anyone_explain_differences_between_sampling/
+https://www.reddit.com/r/StableDiffusion/comments/z7mfib/i_was_curious_how_the_different_sampling_methods/
