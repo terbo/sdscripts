@@ -1,0 +1,72 @@
+Not updated for the latest versions yet. Last edited Dec 24 2022
+
+References:
+Latest video on <8GB training - https://www.youtube.com/watch?v=gw2XQ8HKTAI
+https://github.com/d8ahazard/sd_dreambooth_extension
+https://github.com/cloneofsimo/lora
+https://www.reddit.com/r/StableDiffusion/comments/zcr644/make_better_dreambooth_style_models_by_using/
+https://www.reddit.com/r/StableDiffusion/comments/zfqkh3/we_can_now_do_dreambooth_on_a_gpu_with_only_6gb/
+https://rentry.org/dreambooth-shitguide
+
+Stable Diffusion Dreambooth - https://discord.com/channels/1023277529424986162/1023277529424986165
+Outdated but still useful - https://www.youtube.com/watch?v=9Nu5tUl2zQw
+LoRA parameters - https://github.com/cloneofsimo/lora/discussions/37
+
+Steps to train images with dreambooth:
+
+Parts surrounded by ##'s are only if needed
+
+In your web browser, disable hardware acceleration in the settings.
+
+After installing the dreambooth plugin in Automatic 1111, ##quit the script (Ctrl-C in CMD).##
+
+## Run the dreambooth.bat script which contains extra command-line flags for memory optimization & LoRA support. ##
+
+In the Web UI, select the model you wish to train from - I am currently using sd-v1-5-pruned.
+
+Then under the dreambooth tab, first go to the "Create Model" sub-tab. Give your new model a unique name,
+and choose the model you loaded initially as your "source checkpoint". I am not sure of how effective the
+other options are, but I am currently using the "euler-ancestral" scheduler.
+
+Under the "Parameters" sub-tab, set "Learning rate" to 0.0001,
+then change the "Training Steps Per Image" to at least 1.5x the default.
+Unclick "Save Preview/Ckpt Every Epoch" as this uses extra memory,
+then scroll to the bottom and open "Advanced".
+
+Select "Use LORA", "Use 8bit Adam", change the "Mixed Precision" tab to "fp16", and "Memory Attention" to "xformers".
+
+Under the "Concepts" sub-tab, enter the directory for your images,
+they should already be resized to 512x512 or 768x768, depending on if you are training from SD 1x or SD 2x
+This hasn't been tested on 2.x.
+
+Under "Instance Token" a completely unique keyword you want to refer to the object/person/style you are training.
+
+Under "Class Token" enter the type of object you are training - for a person, 'person', for a dog, 'animal', etc.
+
+Then under "Instance Prompt", "Class Prompt", and "Sample Image Prompt" enter "[filewords]",
+assuming you've used "Preprocess images" and "Use BLIP for caption" under the original "Train" tab for Textual Inversion.
+
+Note, much better results are obtained by manually describing the images with as much detail as possible.
+
+Click "Create Model" - this should take a minute or two.
+
+Then select the Model you just created on the right drop-down "Model", and use the name of your item under "Custom Model Name".
+
+Select "Half Model" which should decrease the training time/memory requirements.
+
+Then click big orange "Train" button and wait - this can take around 30-45 minutes.
+
+After this the LoRA model is located in [webui-dir]\models\lora,
+but to create a .ckpt file click make sure the LoRA model you just created is
+selected under the "Lora Model" dropdown, then click "Generate Ckpt".
+
+## Exit the dreambooth.bat script, and execute auto.bat, which doesn't need all of the memory optimizations. ##
+
+Select your model from the "Stable Diffusion checkpoint" dropdown, and use '[keyword] [class]' in your prompt.
+
+That's it! You can now generate images using your prompt. You may also use the "Checkpoint Merger" to merge
+this checkpoint with another, e.g. a regular stable diffusion checkpoint.
+
+Remember - the models\dreambooth directory can grow pretty large pretty quickly!
+
+Also, you can always quit the training (preferably after an epoch) and resume it by loading the latest LoRA model and selecting 'Load Settings' - you can also generate a checkpoint, to see how the training is going.
