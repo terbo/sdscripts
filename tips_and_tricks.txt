@@ -1,0 +1,25 @@
+Prompt blending styles
+
+style of [greg rutowski|alex grey:25]
+
+Use the first artist for 25 steps then switch to the next artist.
+Use a a decimal number under 1 to switch artists proportionatlly
+(0.5 will switch half way through)
+
+Weighting
+
+Enclose a keyword in brackets then append :weight like so:
+(sun rise:0.5) will give less preference to 'sun rise'.
+
+Emphasis
+
+Use increments of () to increase emphasis on objects or styles
+draw a thing with (another thing) surrounded by (((another thing)))
+Order of keywords also plays a role.
+Using [] will decrease the weight of the phrase/keyword.
+
+Extra quick settings
+
+Extra settings available under 'quicksettings list' in settings: sd_model_checkpoint, sd_hypernetwork, CLIP_stop_at_last_layers, inpainting_mask_weight
+
+https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Command-Line-Arguments-and-Settings
