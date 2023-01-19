@@ -5,7 +5,7 @@ generate an image from the command line
 CSV format:
 prompt,negative_prompt,width,height,steps,seed,cfg,sampler,model,style
 
-Enclose strings in qoutes.
+Enclose strings in quotes.
 
 Requires https://github.com/AUTOMATIC1111/stable-diffusion-webui with '--api' command line flag
 Based on https://github.com/mix1009/sdwebuiapi
@@ -85,7 +85,7 @@ def parse_args():
     parser.add_argument('--seed', help='default seed', default=defaults['seed'])
     parser.add_argument('--cfg', help='CFG scale (0-30)', default=defaults['cfg'])
     parser.add_argument('--sampler', help='sampler to use', default=defaults['sampler'])
-    parser.add_argument('--styles', help='comma seperated list of styles to apply, use --liststyles to view styles', default=defaults['styles'])
+    parser.add_argument('--styles', help='comma separated list of styles to apply, use --liststyles to view styles', default=defaults['styles'])
 
     parser.add_argument('--batch', help='number of images to create', default=defaults['batch'])
     parser.add_argument('--output_dir', help='directory to output images to', default=defaults['output_dir'])
