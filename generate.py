@@ -69,7 +69,7 @@ def read_yaml(yaml_filename='generate.yaml'):
     defaults['seed_base'] = 1e15  # 1000000000000000
 
 def parse_args():
-    parser=argparse.ArgumentParser(prog='generate',
+    parser = argparse.ArgumentParser(prog='generate',
                                    description='Partial command line interface for Automatic 1111 Web UI',
                                    epilog='http://github.com/terbo/sdscripts')
     
@@ -83,6 +83,7 @@ def parse_args():
     parser.add_argument('--negative_prompt', help='negative prompt', default=defaults['negative_prompt'])
     parser.add_argument('--steps', help='sampling steps', default=defaults['steps'])
     parser.add_argument('--seed', help='default seed', default=defaults['seed'])
+    parser.add_argument('--seedbase', help='default seed', default=defaults['seed_base'])
     parser.add_argument('--cfg', help='CFG scale (0-30)', default=defaults['cfg'])
     parser.add_argument('--sampler', help='sampler to use', default=defaults['sampler'])
     parser.add_argument('--styles', help='comma separated list of styles to apply, use --liststyles to view styles', default=defaults['styles'])
@@ -107,8 +108,9 @@ def parse_args():
     parser.add_argument('--saveinfo', action='store_true', help='save generation information')
     parser.add_argument('--showinfo', action='store_true', help='show generation information')
     
-    opts=parser.parse_args()
-    return (opts, parser.print_help)
+    parser.add_argument('--debug', action='store_true', help='show debug information')
+    
+    return (parser.parse_args(), parser.print_help)
 
 # from automatic1111 modules\images.py
 def sanitize_filename_part(text, replace_spaces=True):
@@ -133,7 +135,9 @@ def sanitize_filename_part(text, replace_spaces=True):
 
 def generate_image(options):
   if (not options.seed) or (options.seed == '0') or (options.seed == 0):
-    options.seed = int(random.random() * 1e10)
+    options.seed = random.randint(1, int(float(defaults['seed_base'])))
+    if options.debug:
+      print('Seed: %d' % options.seed)
   
   prompt = "%s%s%s" % (options.prompt, ', ' if options.styles else '', (options.styles))
 
@@ -157,7 +161,7 @@ def save_text_properties(options, output_file):
   
   txtfile.writelines(text)
   txtfile.close()
-  if options.showinfo:
+  if options.showinfo or options.debug:
     print(''.join(text))
 
 def prettyprint(var):
@@ -195,6 +199,7 @@ def read_csv(options):
           api.util_set_model(options.model)
         
         generate(options)
+  
   sys.exit()
 
 def generate(options):
@@ -214,6 +219,7 @@ def generate(options):
   
   if int(options.batch) > 1:
     for x in range(0, int(options.batch)):
+      options.seed = 0
       _generate(options)
   else:
       _generate(options)
@@ -221,7 +227,8 @@ def generate(options):
 if __name__ == '__main__':
   read_yaml()
   (opts, usage) = parse_args()
-
+  #random.seed(31337)
+  
   # create API client with custom host, port
   api = webuiapi.WebUIApi(host=opts.host, port=opts.port)
   

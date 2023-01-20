@@ -11,3 +11,4 @@ samplers.txt: a list of samplers and links to technical details on their differe
 
 backup-config.txt: backup important files from automatic 1111 configuration
 
+latent.py: create images with seamless transitions, command line, infinite prompts
