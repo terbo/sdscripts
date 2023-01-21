@@ -13,9 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# TODO: Add CSV
-# TODO: Remember last seed to make merge more coherent
-	(Or remove the last frames that are slightly out of sync with last generation)
+# [terbo 1/20/2023]
+# Latent blending with infinite prompts
+
+# Modified from https://github.com/lunarring/latentblending
+# Requires: latentblending, stable diffusion checkpoint (v1 or v2)
+
+# Usage: latent.py -p "first image prompt" -p "second image prompt" [-p "more prompts"]
+# Run latent.py -h for more information
+
+# TODO: Add txt/csv
+# TODO: Remove the last frames that are slightly out of sync with next generation
 # TODO: Add extension parsing, so .mp4 isn't the default
 
 import os, sys, random, argparse
