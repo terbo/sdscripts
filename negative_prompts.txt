@@ -5,6 +5,10 @@ blurred, chaotic, cluttered, dull, fuzzy, inadequate, indistinct, jumbled, lackl
 References:
 https://www.reddit.com/r/StableDiffusion/comments/yy2i5a/i_created_a_negative_embedding_textual_inversion/
 
+Embeddings:
+https://huggingface.co/tolerantpancake/NegativeMutation
+https://huggingface.co/datasets/Nerfgun3/bad_prompt
+
 The embedding 'bad_prompt_version2' can be used in the 'negative prompt' field.
 Specify a weight of 0.8: (bad_prompt_version2:0.8)
 
