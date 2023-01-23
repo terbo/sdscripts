@@ -7,3 +7,5 @@ rem pip install --upgrade pip
 call venv\scripts\activate.bat
 git pull
 pip install -U -r requirements.txt
+
+pause
