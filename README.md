@@ -1,5 +1,5 @@
 # sdscripts
-stuff for stable diffusion
+stuff for stable diffusion, scripts for automatic 1111 webui
 
 generate.py: a command line interface for the automatic 1111 webui using the python library webuiapi
 

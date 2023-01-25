@@ -71,6 +71,10 @@ Gigafractal
 https://civitai.com/models/1193/gigafractal-diffusion-sd15
 gigafractal artstyle
 
+ParchArt
+https://www.reddit.com/r/StableDiffusion/comments/106dpmm/a_chaotic_inkonparchment_drawing_embedding_for/
+https://huggingface.co/EldritchAdam/ParchArt
+
 Trinart
 https://huggingface.co/naclbit/trinart_stable_diffusion_v2
 

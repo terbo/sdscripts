@@ -19,3 +19,6 @@ disfigured, kitsch, ugly, oversaturated, grain, low-res, Deformed, blurry, bad a
 poor line quality, bad proportions, scratchy lines, poor composition, lack of realism, poor structure, poor light quality, lack of perspective, poor colour, lack of creativity, poor framing, poor contrast, poor shading, lack of detail, poor anatomy, poor composition, and poor perspective
 
 blurred, chaotic, cluttered, dull, fuzzy, inadequate, indistinct, jumbled, lacklustre, messy, muddled, nondescript, unappealing, unimpressive, uninteresting, unsatisfying, vague, unrefined, unsharpened
+
+huge list of prompts, nsfw, but a few good ones, maybe?
+https://rentry.org/SchizoNegative

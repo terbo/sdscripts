@@ -1,0 +1,14 @@
+PortiaLynnTurlet · 2 mo. ago ·
+edited 2 mo. ago
+
+A VAE is a variational autoencoder.
+
+An autoencoder is a model (or part of a model) that is trained to produce its input as output. By giving the model less information to represent the data than the input contains, it's forced to learn about the input distribution and compress the information. A stereotypical autoencoder has an hourglass shape - let's say it starts with 100 inputs and reduces it to 50 then 20 then 10 (encoder) and then 10 to 20 to 50 to 100 (decoder). The 10 dimensions that the encoder produces and the decoder consumes are called the latent representation.
+
+Autoencoders can be a powerful paradigm and can be trained in an unsupervised way (without needing to label data since we only need the input data). However, if we want to sample from the input distribution, a vanilla autoencoder makes this difficult or impossible. One variation on the autoencoder is the variational autoencoder where the latent is normally distributed, which allows for the output distribution to be sampled from.
+
+SD is somewhat unique in the vision class of diffusion models in that the diffusion process operates in the autoencoder space instead of pixel space. This makes the diffusion process more computationally efficient / memory efficient compared to a vanilla pixel space diffusion model. One other related technique some models use is to start the diffusion at a lower spatial resolution and progressively upscale to save compute.
+
+In practice, in SD, the VAE is pretty aggressive and the dataset is filtered (indirectly through the aesthetic score) which removes images with a lot of text. This combined with the autoencoder is a significant reason SD struggles more with producing text than models like Dall-e.
+
+From the above, an autoencoder is essential in SD. Generally speaking, there's no reason to modify the autoencoder unless the image distribution you're training on is dramatically different than the natural images given to SD. In this case, you'd likely need to retrain all parts of the model (or at least the unet). One example case where this might be useful is if you wanted to train an audio diffuser using the same components as SD but on "pixel" data from a spectrogram.
