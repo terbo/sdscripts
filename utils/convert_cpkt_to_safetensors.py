@@ -9,11 +9,12 @@
 # Place this file in the **SAME DIRECTORY** as all of your .ckpt files, open a command prompt for that folder, and run:
 # python convert_to_safe.py
 
-import os
+import os, sys, glob
 import torch
 from safetensors.torch import save_file
 
-files = os.listdir()
+#files = os.listdir()
+files = glob.glob(sys.argv[1])
 for f in files:
     if f.lower().endswith('.ckpt'):
         print(f'Loading {f}...')

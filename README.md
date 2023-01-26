@@ -1,14 +1,10 @@
 # sdscripts
-stuff for stable diffusion, scripts for automatic 1111 webui
+stuff for stable diffusion, guides and scripts for automatic 1111 webui
 
-generate.py: a command line interface for the automatic 1111 webui using the python library webuiapi
+automatic1111/: webui-user script with comments, backup config batch file, update batch file, dreambooth example configs
 
-negative_prompts.txt: a list of negative prompts that may be useful, but you should pick and choose them
+dev/:           command-line api python script, latent blending python script
 
-models-embeddings.txt: a list of models/embeddings and their keywords and urls
+models/:        ways to convert models, ffmpeg batch files, prettyprint
 
-samplers.txt: a list of samplers and links to technical details on their differences
-
-backup-config.txt: backup important files from automatic 1111 configuration
-
-latent.py: create images with seamless transitions, command line, infinite prompts
+guides/:        text guides, howto's and tips, including negative prompts, fine-tuning, links, settings, and plugins

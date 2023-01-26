@@ -1,0 +1,23 @@
+[
+    {
+        "max_steps": 150,
+        "instance_prompt":      "a person"
+        "class_prompt":         "photo of a person",
+        "instance_data_dir":    "c:\pics",
+        "class_data_dir":       "c:\pics",
+        "file_prompt_contents": "Description",
+        "save_sample_prompt": "",
+        "save_sample_template": "",
+        "instance_token": "[filewords]",
+        "class_token": "[filewords]",
+        "num_class_images_per": 5,
+        "class_negative_prompt": "",
+        "class_guidance_scale": 7.5,
+        "class_infer_steps": 40,
+        "save_sample_negative_prompt": "",
+        "n_save_sample": 1,
+        "sample_seed": -1,
+        "save_guidance_scale": 7.5,
+        "save_infer_steps": 40
+    }
+]
