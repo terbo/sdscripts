@@ -1,1 +1,39 @@
 A list of useful automatic 1111 settings
+
+Saving images/grids -
+
+Always save all generated image grids - Not always necessary
+Save text information about generation parameters as chunks to png files - Save generation paramaters as text inside of images
+Create a text file next to every image with generation parameters - Saves a text file beside the generated image
+Do not add watermark to images - Should probably keep this enabled
+
+System -
+
+Extra debugging:
+Show warnings in console
+Always print all generation info to standard output
+
+Training -
+
+Move VAE and CLIP to RAM when training if possible. Saves VRAM - Check to save memory
+
+Interrogate Options -
+
+Interrogate: keep models in VRAM - Uncheck to save memory
+
+User interface -
+
+Show grid in results for web - Disable if you don't want the grid generated
+Add model hash to generation information
+Add model name to generation information
+When reading generation parameters from text into UI (from PNG info or pasted text), do not change the selected model/checkpoint.
+
+Live Previews -
+
+Show live previews of the created image - Allow you to see the image being generated, allowing you to stop generation if it is going in the wrong direction
+
+Extensions -
+
+Image Browser - Preload images at startup
+
+Dynamic Prompts - Write prompts to file: Create a new .txt file for every batch containing the prompt template as well as the generated prompts.

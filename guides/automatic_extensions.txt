@@ -1,1 +1,18 @@
 A list of useful automatic1111 extensions
+
+Animator
+Deforum
+Dreambooth
+Embedding Inspector
+Gimp Plugin
+Krita Plugin
+Image Browser
+Model Convertor
+openOutpaint
+Photoshop Plugin
+Prompt Generator
+PromptGen
+Prompt Travel
+Save Intermediate Images
+Seed Travel
+System Info
