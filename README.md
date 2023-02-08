@@ -1,13 +1,6 @@
 # sdscripts
 stuff for stable diffusion, guides and scripts for automatic 1111 webui
 
-`   m                  #                  
- mm#mm   mmm    m mm  #mmm    mmm    mmm  
-   #    #"  #   #"  " #" "#  #" "#  #   " 
-   #    #""""   #     #   #  #   #   """m 
-   "mm  "#mm"   #     ##m#"  "#m#"  "mmm" () 
-                                          `
-
 
 automatic1111/: webui-user script with comments, backup config batch file, update batch file, dreambooth example configs
 
