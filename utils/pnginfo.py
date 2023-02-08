@@ -5,9 +5,9 @@ import argparse
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(prog='pnginfo',
                                    description='Extract generation parameters from images created with Automatic 1111')
-  parser.add_argument('-prompt', action='store_true', help='Display prompt')
-  parser.add_argument('-params', action='store_true', help='Display params')
-  parser.add_argument('-i', help='Display params')
+  parser.add_argument('-prompt', action='store_true', help='Display only prompt')
+  parser.add_argument('-params', action='store_true', help='Display only parameters')
+  parser.add_argument('-i', help='Select images, globs valid')
   
   opts = parser.parse_args()
 
