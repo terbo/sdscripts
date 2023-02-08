@@ -1,3 +1,6 @@
+# image tiler for automatic 1111 (script), version 0.1
+# kinda broken, doesn't generate proper image sizes and multiples
+
 from collections import namedtuple
 from copy import copy
 from itertools import permutations, chain
