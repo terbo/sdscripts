@@ -1,3 +1,4 @@
+# adapted from https://stackoverflow.com/questions/48631908/python-extract-metadata-from-png
 import sys, glob
 from PIL import Image
 import argparse
