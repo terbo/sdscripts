@@ -1,3 +1,19 @@
+# mixture of diffusers gradio interface
+# UI for https://github.com/albarji/mixture-of-diffusers
+# v0.1.1 terbo https://github.com/terbo/sdscripts/utils
+#
+# Mixture of Diffusers
+#  ... a method for integrating a mixture of different diffusion processes collaborating to generate a single image.a
+#  Each diffuser focuses on a particular region on the image, taking into account boundary effects to promote a smooth blending.
+#
+# Install MoD then add gradio to the venv - it should work in the automatic1111 virtual environment, maybe ligo-segments need to be the exact version
+#
+# TODO
+# fix gradio layout...
+# fix output gallery
+# add img2img support
+# add generation params to pnginfo..
+
 import os, glob, time
 import gradio as gr
 import numpy as np
@@ -6,24 +22,45 @@ import torch
 from diffusers import DDIMScheduler, LMSDiscreteScheduler
 from diffusiontools.tiling import StableDiffusionTilingPipeline
 
-def mixture_of_diffusers(prompts, seed, gc, steps, amount, model_id, tile_width, tile_height, tile_row_overlap, tile_col_overlap, cpu_vae, sampler):
-  prompts = [prompts.split('\n')]
+models = [
+ 'None (input text above)',
+ 'CompVis/Stable-Diffusion-1-4',
+ 'runwayml/stable-diffusion-v1-5',
+ 'prompthero/openjourney-v2',
+ 'Envvi/Inkpunk-Diffusion',
+ 'XpucT/Deliberate',
+ 'nitrosocke/archer-diffusion',
+]
+
+def mixture_of_diffusers_img2img(prompts, img2img_image, styles, seed, seedstep, cfgscale, steps, amount, model_id, model_id_in, tile_width, tile_height, tile_row_overlap, tile_col_overlap, cpu_vae, sampler):
+  pass
+
+def mixture_of_diffusers(prompts, styles, seed, seedstep, cfgscale, steps, amount, model_id, model_id_in, tile_width, tile_height, tile_row_overlap, tile_col_overlap, cpu_vae, sampler):
+  prompts = [list(map(lambda x: x + f', {styles}', prompts.split('\n')) if len(styles) else '')]
   amount = int(amount)
+  seedstep = int(seedstep)
   steps = int(steps)
-  gc = int(gc)
+  cfgscale = int(cfgscale)
   
   if seed == -1:
     seed = generate_seed()
   else:
     seed = int(seed)
 
-  final_height = (len(prompts[0]) * tile_width) - (tile_row_overlap * (len(prompts[0]) - 1))
-  imgsize = '%dx%d' % (final_height, tile_height)
-  
+  final_width = (len(prompts[0]) * tile_width) - (tile_row_overlap * (len(prompts[0]) - 1))
+  imgsize = '%dx%d' % (final_width, tile_height)
+
+  if model_id.startswith('None'):
+    if len(model_id_in):
+      model_id = model_id_in
+    else:
+      model_id = models[0]
+
   print(f'Prompt: {prompts}')
   print(f'Model: {model_id}')
   print(f'Steps/images: {steps}, {amount}')
-  print(f'Seed/GC: {seed}, {gc}')
+  print(f'Seed/CFG: {seed}, {cfgscale}')
+  print(f'Final Resolution: {final_width}x{tile_height}')
   print(f'Tile Width/Height: {tile_width}x{tile_height}')
   print(f'Overlap Width/Height: {tile_row_overlap}x{tile_col_overlap}')
 
@@ -43,7 +80,7 @@ def mixture_of_diffusers(prompts, seed, gc, steps, amount, model_id, tile_width,
   images = []
     
   pipeargs = {
-      'guidance_scale': gc,
+      'guidance_scale': cfgscale,
       'num_inference_steps': steps,
       'seed': seed,
       'prompt': prompts,
@@ -66,7 +103,7 @@ def mixture_of_diffusers(prompts, seed, gc, steps, amount, model_id, tile_width,
     image.save(output)
     
     params = '%s\n' % prompts[0]
-    params += 'Steps: %s, Sampler: %s, CFG scale: %s, Seed: %s, ' % (steps, sampler, gc, pipeargs['seed'])
+    params += 'Steps: %s, Sampler: %s, CFG scale: %s, Seed: %s, ' % (steps, sampler, cfgscale, pipeargs['seed'])
     params += 'Size: %s, Model: %s\n' % (imgsize, model_id)
     params += 'Tile row overlap: %d Tile column overlap: %d\n' % (tile_row_overlap, tile_col_overlap)
     params += 'CPU VAE: %s' % cpu_vae
@@ -76,8 +113,7 @@ def mixture_of_diffusers(prompts, seed, gc, steps, amount, model_id, tile_width,
     with open(params_file, 'w') as params_fp:
       params_fp.write(params)
 
-    pipeargs['seed'] += 100
-    # add generation params to pnginfo..
+    pipeargs['seed'] += seedstep
 
   return images
 
@@ -93,43 +129,64 @@ def generate_seed():
   return int(np.random.randint(999999999))
 
 def ui():
-  find_output_images()
+  output_images = find_output_images()
   
-  with gr.Blocks(css='#gallery { max-width: 15% } ') as demo:
+  #with gr.Blocks(css='#gallery { object-fit: scale-down } #sidegallery { max-width: 15% } #btn { flex-grow: 0; max-width: 3.5em; min-width: 3.5em !important } #slider { max-width: 10em ; min-width: 10em !important }') as demo:
+  with gr.Blocks() as demo:
     with gr.Column():
       with gr.Row():
-        with gr.Column():
+        with gr.Column(scale=3):
           with gr.Row():
             prompts = gr.Textbox(label='Prompt(s)')
-            with gr.Column():
-              tile_width = gr.Slider(64, 768, value=384, step=64, label='Tile Width', interactive=True)
+            style = gr.Textbox(label='Style (added to every prompt)')
+
+          with gr.Column(scale=2):
+            with gr.Row():
+              model_id_in = gr.Text(value='', label='Model')
+              model_id = gr.Dropdown(models, value='runwayml/stable-diffusion-v1-5', label='Model')
+ 
+            with gr.Row():
+              tile_width = gr.Slider(64, 768, value=512, step=64, label='Tile Width', interactive=True)
               tile_height = gr.Slider(64, 768, value=512, step=64, label='Tile Height', interactive=True)
               tile_row_overlap = gr.Slider(64, 768, value=256, step=64, label='Overlap Width', interactive=True)
               tile_col_overlap = gr.Slider(64, 768, value=256, step=64, label='Overlap Height', interactive=True)
           
           with gr.Row():
-            model_id = gr.Dropdown(['CompVis/Stable-Diffusion-1-4', 'prompthero/openjourney-v2'], value='prompthero/openjourney-v2', label='Model')
             sampler = gr.Radio(['DDIM','LMS'], value='LMS', label='Sampler')
-            
-            seed = gr.Number(label='Seed', value=-1)
-            new_seed = gr.Button(value='New')
-            zero_seed = gr.Button(value='Old')
-            
-            gc = gr.Number(label='GC', value=7)
-            steps = gr.Number(value=50, label='Steps')
-            amount = gr.Number(value=1, label='Images to generate')
-            cpu_vae = gr.Checkbox(value=False, label='Use CPU VAE')
+            cpu_vae = gr.Checkbox(value=True, label='Use CPU VAE')
           
-          btn = gr.Button(value='Generate')
-        outputs = gr.Gallery(elem_id='gallery', value=find_output_images())
+          with gr.Row():
+            new_seed = gr.Button(value='New Seed')
+            zero_seed = gr.Button(value='Random Seed')
+            seedstep = gr.Number(label='Seed step', value=100)
+            seed = gr.Number(label='Seed', value=-1)
+          
+          with gr.Row():
+            cfgscale = gr.Number(label='CFG Scale', value=7)
+            amount = gr.Number(value=1, label='Images to generate')
+            steps = gr.Number(value=50, label='Steps')
+        
+          generate_btn = gr.Button(value='Generate')
+        with gr.Column(scale=1):
+          update_btn = gr.Button(value='Refresh')
+          outputs = gr.Gallery(value=output_images)
     
     with gr.Column():
-      output_image = gr.Gallery(label='Output').style(container=False) 
+      with gr.Tab('output'):
+        output_image = gr.Gallery(label='Output')
+      with gr.Tab('img2img'):
+        img2img_btn = gr.Button(value='Generate')
+        img2img_image = gr.Image(label='Input')
 
     new_seed.click(generate_seed, None, [seed])
     zero_seed.click(reset_seed, None, [seed])
+   
+    update_btn.click(find_output_images, None, [outputs])
+
+    generate_btn.click(mixture_of_diffusers, [prompts, style, seed, seedstep, cfgscale, steps, amount, model_id, model_id_in,
+                                     tile_width, tile_height, tile_row_overlap, tile_col_overlap, cpu_vae, sampler], [output_image])
     
-    btn.click(mixture_of_diffusers, [prompts, seed, gc, steps, amount, model_id,
+    img2img_btn.click(mixture_of_diffusers_img2img, [prompts, img2img_image, style, seed, seedstep, cfgscale, steps, amount, model_id, model_id_in,
                                      tile_width, tile_height, tile_row_overlap, tile_col_overlap, cpu_vae, sampler], [output_image])
     
     #output_image.change(find_output_images, None, outputs)
