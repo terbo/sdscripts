@@ -1,14 +1,28 @@
 # mixture of diffusers gradio interface
 # UI for https://github.com/albarji/mixture-of-diffusers
-# v0.1.1 terbo https://github.com/terbo/sdscripts/utils
+# v0.1.1 terbo - https://github.com/terbo/sdscripts/utils
 #
-# Mixture of Diffusers
-#  ... a method for integrating a mixture of different diffusion processes collaborating to generate a single image.a
+# Mixture of Diffusers:
+#  ... a method for integrating a mixture of different diffusion processes collaborating to generate a single image.
 #  Each diffuser focuses on a particular region on the image, taking into account boundary effects to promote a smooth blending.
 #
-# Install MoD then add gradio to the venv - it should work in the automatic1111 virtual environment, maybe ligo-segments need to be the exact version
+#
+# Install MoD, save this script to the mixtures-of-diffusion directory,
+# then:
+#
+#   create a venv (python -mvenv venv --prompt mod)
+#   enter the venv (venv\scripts\activate)
+#   install packages (pip install gradio scipy==1.10.* diffusers[torch]==0.7.* ftfy==6.1.* gitpython==3.1.* ligo-segments==1.4.* torchvision==0.14.* transformers==4.21.*)
+#   install torch, using the same method you use for automatic 1111
+#
+# Saves images in outputs/, and besides each saves a text file containing generation parameters.
+#
+# Some models don't work properly, I think it may be a VAE issue, but the ones in the dropdown seem OK.
+# I usually img2img in automatic1111 after generating here, as the colors usually aren't too crisp.
+#
 #
 # TODO
+#
 # fix gradio layout...
 # fix output gallery
 # add img2img support
@@ -42,7 +56,7 @@ def mixture_of_diffusers(prompts, styles, seed, seedstep, cfgscale, steps, amoun
   steps = int(steps)
   cfgscale = int(cfgscale)
   
-  if seed == -1:
+  if seed == -1 or seed == '':
     seed = generate_seed()
   else:
     seed = int(seed)
@@ -131,7 +145,6 @@ def generate_seed():
 def ui():
   output_images = find_output_images()
   
-  #with gr.Blocks(css='#gallery { object-fit: scale-down } #sidegallery { max-width: 15% } #btn { flex-grow: 0; max-width: 3.5em; min-width: 3.5em !important } #slider { max-width: 10em ; min-width: 10em !important }') as demo:
   with gr.Blocks() as demo:
     with gr.Column():
       with gr.Row():
