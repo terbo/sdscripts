@@ -8,11 +8,12 @@
 #
 #
 # Install MoD, save this script to the mixtures-of-diffusion directory,
-# then:
+# and either use the automatic1111 venv (will just need to install diffusers package),
+# or:
 #
 #   create a venv (python -mvenv venv --prompt mod)
 #   enter the venv (venv\scripts\activate)
-#   install packages (pip install gradio scipy==1.10.* diffusers[torch]==0.7.* ftfy==6.1.* gitpython==3.1.* ligo-segments==1.4.* torchvision==0.14.* transformers==4.21.*)
+#   install packages (pip install -r requirements.txt)
 #   install torch, using the same method you use for automatic 1111
 #
 # Saves images in outputs/, and besides each saves a text file containing generation parameters.
@@ -28,6 +29,8 @@
 # fix output gallery
 # add img2img support
 # add generation params to pnginfo..
+# make images into grid preview when rendered
+# switch to output window when when generate is clicked
 
 import os, glob, time
 import gradio as gr
@@ -37,7 +40,7 @@ import torch
 from diffusers import DDIMScheduler, LMSDiscreteScheduler, KarrasVeScheduler, EulerDiscreteScheduler, DDPMScheduler
 from mixdiff.tiling import StableDiffusionTilingPipeline
 
-OUTPUT = './output'
+OUTPUT = './outputs'
 
 schedulers = ['LMSDiscreteScheduler', 'DDIMScheduler'] #, 'KarrasVeScheduler', 'EulerDiscreteScheduler', 'DDPMScheduler']
 
@@ -131,7 +134,7 @@ def mixture_of_diffusers(prompts, styles, seed, seedstep, cfgscale, steps, amoun
     image = pipe(**pipeargs)['sample'][0]
     end_time = int(time.time())
 
-    output = f"outputs/{end_time}_{pipeargs['seed']}.png"
+    output = f"{OUTPUT}/{end_time}_{pipeargs['seed']}.png"
     print(f'Generated image to {output} in {end_time - start_time}s')
     images.append(image)
     image.save(output)
@@ -152,7 +155,7 @@ def mixture_of_diffusers(prompts, styles, seed, seedstep, cfgscale, steps, amoun
   return images
 
 def find_output_images():
-  output_images = glob.glob('outputs/*png')
+  output_images = glob.glob(f'{OUTPUT}/*png')
   output_images = reversed(output_images)
   return output_images
 
