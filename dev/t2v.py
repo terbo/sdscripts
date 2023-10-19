@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 
 # t2v generator v0.1: Generate videos from text prompts
 # Uses Automatic1111 WebUI with API access and the text2video extension.
-# In settings, enable 'keep model in memory' for text2video.
+# In settings/text2video, select "All" under 'Keep model in VRAM between runs'
 # Using the proper resolution for each model helps, good luck!
 #
 # TODO: Check request return, more error checking
@@ -44,7 +44,7 @@ def generate(prompt, uri,
     
     img_b64 = base64.b64encode(img).decode('utf8')
     
-    #data['inpainting_image'] = img
+    data['inpainting_image'] = img
     data['inpainting_frames'] = 1
   
   if vid2vid:
@@ -143,8 +143,12 @@ if __name__ == '__main__':
       prompts = fp.read().splitlines()
 
     for prompt in prompts:
-      generate(prompt, opts.api)
+      generate(prompt, opts.api, n_prompt=opts.negative, width=opts.width, height=opts.height,
+             cfg=opts.cfg, frames=opts.frames, fps=opts.fps, sampler=opts.sampler,
+             seed=opts.seed, steps=opts.steps, model=opts.model)
   elif opts.prompt and opts.api:
-    generate(opts.prompt, opts.api)
+    generate(opts.prompt, opts.api, n_prompt=opts.negative, width=opts.width, height=opts.height,
+             cfg=opts.cfg, frames=opts.frames, fps=opts.fps, sampler=opts.sampler,
+             seed=opts.seed, steps=opts.steps, model=opts.model)
   else: 
     parser.print_help()
