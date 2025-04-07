@@ -1,0 +1,52 @@
+models:
+  - name: FLUX
+    value: 0.4
+    count: 3
+
+  - name: PuLID-FLUX
+    value: 0.4
+    count: 3
+
+  - name: HunyuanVideo
+    value: 0.15
+    count: 3
+
+  - name: LTX-Video
+    value: 0.06
+    count: 3
+
+  - name: CogVideoX
+    value: 0.3
+    count: 3
+
+  - name: Wan2.1-T2V-1.3B
+    value: 0.08
+    count: 3
+
+  - name: Wan2.1-T2V-14B
+    value: 0.2
+    count: 3
+
+  - name: Wan2.1-I2V-480P-14B
+    value: 0.26
+    count: 3
+
+  - name: Wan2.1-I2V-720P-14B
+    value: 0.25
+    count: 3
+
+  - name: Wan2.1-T2V-1.3B-ret-mode
+    value: 0.15
+    count: 3
+
+  - name: Wan2.1-T2V-14B-ret-mode
+    value: 0.2
+    count: 3
+
+  - name: Wan2.1-I2V-480P-14B-ret-mode
+    value: 0.3
+    count: 3
+
+  - name: Wan2.1-I2V-720P-14B-ret-mode
+    value: 0.3
+    count: 3
