@@ -1,0 +1,65 @@
+# TODO
+# add per scene settings like clip duration, fps, dimensions, other effects? etc
+
+name: spaceopera
+
+frames: 33
+width: 720
+height: 480
+steps: 20
+cfg: 6
+
+atmosphere: |-2
+
+  neo-deco sci-fi noir, deep space, retro-futuristic, cold blues and purples, chrome and rust, flickering holograms, 
+  analog tech, dramatic shadows, glowing rim light, cinematic lens flares, art deco geometry, fog and particle drift, 
+  glitch effects, melancholic, moody, tragic beauty, cowboy bebop vibes, dark jazz atmosphere, dub echo ambiance, 
+  space gangster aesthetic, random floating space debris
+
+scenes:
+  - "Interior of a dimly lit spaceship medbay, flickering heart monitor, cold metallic surfaces, fading flickering holographic bodies on medbeds"
+  - "Overhead shot of a musical group of astronauts in suits, on a dark stage playing futuristic synthesizers, a large stadium people holding up lighters"
+  - "Floating over a mars colony, large florescent orange geodesic domes, sattelite dish arrays, large battery and storage containers"
+  - "aerial shot of large florescent orange geodesic domes"
+  - "A tracking shot of a mosh pit full of aliens inside of a large musical stadium full of people"
+  - "A craning shot of a single person in a space suit playing multiple keyboards, a single overhead spotlight illuminating them, blackness all around"
+  - "A handheld shot of a single person in a space suit playing multiple keyboards, a single overhead spotlight illuminating them, blackness all around"
+  - "Closeup of fingers striking a lighted drum pads"
+  - "Rack focus on a foreign planet, then zoom out to the rings surrounding it"
+  - "A tracking shot of a small asteroid hitting the surface of a remote planet, then impacting and exploding"
+  - "a wide shot of a A room with a wall full of monitors showing monitoring other planets, graphs and charts"
+  - "wide shot of floating translucent opaque florescent disconnected piano keys depressing in space"
+  - "Closeup of two hands playing musical keyboards"
+  - "A closeup of an astronaut floating through deep space while playing a heavy metal guitar, bobbing his head, wide stroking the guitar"
+  - "Panning shot of a massive rotating space station silhouetted against a purple nebula, mechanical groans"
+  - "A space jester juggling small asteroids in a synthesized concrete campus park teaming with people in space uniforms walking around and having fun"
+  - "POV shot of a Dark corridor in spaceship with red emergency lighting blinking rhythmicall, old supply crates, junk and debris littered everywhere"
+  - "Zoom-in on a cracked space helmet floating slowly, with condensation and blood smudges inside"
+  - "Astronaut drifting alone in deep space, tiny against stars, suit frosted over, total silence"
+  - "Starfield warping violently as a ship jumps to hyperspace, light flares"
+  - "Mechanical arms assembling a glowing engine core, sparks flying in slow motion"
+  - "Low-angle shot of a gangster in space gear, gold chain floating, beat synced head bob, neon-lit interior"
+  - "A dolly shot in a bar in space, full of colorful and odd aliens of different species and varieties, moving toward an alien band playing weird musical instruments on a small stage in the corner of a bar"
+  - "A tilt shot of an alien band on a small stage in the corner of a bar playing weird musical instruments, in a bar in space" 
+  - "A pan shot of an alien band on a small stage in the corner of a bar playing weird musical instruments, rocking out hard, in a bar in space" 
+  - "A handheld shot of an alien band on a small stage in the corner of a bar playing weird musical instruments, asleep on stage, in a bar in space"
+  - "A high angle shot of an alien band on a small stage in the corner of a bar playing weird musical instruments, drinking large weird colorful coctails, in a bar in space"
+  - "A tilt shot of an alien band on a small stage in the corner of a bar playing weird musical instruments, drinking large weird colorful coctails, in a bar in space"
+  - "Over the shoulder shot of a Space Cowboy lighting a cigar inside cockpit, jazz shadows cast across his face, slow zoom"
+  - "High-speed chase through asteroid belt, camera shaking, asteroids racing towards screen, rapid cut flashes"
+  - "chase through asteroid belt, camera shaking, asteroids racing towards screen, rapid cut flashes"
+  - "Overhead shot of crew in a worn-out ship, flickering lights"
+  - "Nova explosion in distance, debris expanding like flowers in bloom, cinematic lens flare"
+  - "Frozen planet surface, everything covered in ice, shattered hull pieces half-buried in snow"
+  - "Shot from inside cockpit: proximity alarms flashing red, dub FX warping space outside"
+  - "A lone figure watching stars from inside a prison cell window in a derelict ship"
+  - "Close-up of a single tear floating in zero-g, shimmering"
+  - "high angle shot of a Glitchy hologram of a woman singing opera in a smoky ship bar"
+  - "Interior of command deck, lights flicker in sync with heartbeat monitor, camera slowly rotating"
+  - "establishing shot of a Massive space graveyard, broken ships and wreckage floating, eerily still"
+  - "Massive space graveyard, broken ships and wreckage floating, eerily still, close up of broken ship with part of it blown up long ago"
+  - "Astronauts in a dense asteroid field jumping from asteroid to asteroid"
+  - "a man standing next to a large 1950's style machine with lots of buttons and dials, the entire machine cut off from view, then the camera zooms out to show the size of the machine is 2 stories high"
+
+
+#    stranded in space, reminescing of 1980s earth
