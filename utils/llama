@@ -1,0 +1,41 @@
+#!/bin/bash
+# Run llama-server and apply common settings
+
+test -n "$LLM_HOST" || LLM_HOST=0.0.0.0
+test -n "$LLM_PORT" || LLM_PORT=8000
+test -n "$LLM_MODEL" || LLM_MODEL=$1
+test -n "$LLM_VERBOSE" || LLM_VERBOSE=1
+test -n "$LLM_QUANT" || LLM_QUANT='--flash_attn -ctk q8_0 -ctv q8_0'
+
+test -n "$LLM_LAYERS" || LLM_LAYERS=65
+test -n "$LLM_CONTEXT" || LLM_CONTEXT=16384
+test -n "$LLM_RUNDIR" || LLM_RUNDIR='/usr/local/bin'
+
+# for qwen 3 / reasoning
+test -n "$LLM_EXTRA" || LLM_EXTRA="--top-k 20 --top-p 0.95 --temp 0.6 --min-p 0"
+
+if [[ -f "/data/models/llm/$1" ]]; then
+    BASE_DIR=/data/models/llm
+elif [[ -f "/mnt/winh/models/$1" ]]; then
+	BASE_DIR=/mnt/winh/models
+elif [[ -f "/opt/models/$1" ]]; then
+	BASE_DIR=/opt/models
+elif [[ -f "/data2/models/$1" ]]; then
+	BASE_DIR=/data2/models/llm
+else
+		BASE_DIR=.
+fi
+#test -n "$LLM_LAYERS" || test $SIZE -gt 8000000000 && LLM_LAYERS=18
+
+# test if the size is over 16GB and if so add LLM_MULTIGPU
+SIZE=$(stat -c '%s' "${BASE_DIR}/${LLM_MODEL}")
+SIZE_GB=$((SIZE / (1024 * 1024 * 1024)))  # Convert size to GB
+
+if [ "$SIZE_GB" -gt 16 ]; then
+    echo 'Using multi-GPU mode'
+    LLM_MULTIGPU='--split-mode layer'
+fi
+
+echo ${LLM_RUNDIR}/llama-server --host $LLM_HOST --port $LLM_PORT --n_gpu_layers $LLM_LAYERS --ctx-size $LLM_CONTEXT --parallel 1 $LLM_MULTIGPU $LLM_QUANT ${LLM_EXTRA} -m "${BASE_DIR}/${LLM_MODEL}"
+
+${LLM_RUNDIR}/llama-server --host $LLM_HOST --port $LLM_PORT --n_gpu_layers $LLM_LAYERS --ctx-size $LLM_CONTEXT --parallel 1 $LLM_MULTIGPU $LLM_QUANT ${LLM_EXTRA} -m "${BASE_DIR}/${LLM_MODEL}"
