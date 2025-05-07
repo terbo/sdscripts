@@ -1,0 +1,61 @@
+#!/usr/bin/python3
+
+import argparse
+import ollama
+from datetime import datetime
+from humanize import naturalsize
+
+def fetch_models():
+    try:
+        models = ollama.list().get('models', [])
+        return models
+    except Exception as e:
+        print('Error fetching models from Ollama:', e)
+        return []
+
+def parse_date(date_str):
+    """Parses ISO date strings, returns datetime or epoch fallback."""
+    try:
+        return datetime.fromisoformat(str(date_str))
+    except ValueError:
+        return datetime.fromtimestamp(0)
+
+def display_models(models, sort_by='name'):
+    if not models:
+        print('No models found.')
+        return
+
+    sort_key = {
+        'name': lambda m: m['model'].lower(),
+        'size': lambda m: m.get('size', 0),
+        'date': lambda m: parse_date(m.get('modified_at', ''))
+    }.get(sort_by, lambda m: m['model'].lower())
+
+    sorted_models = sorted(models, key=sort_key)
+
+    print(f'%-64s %-12s %20s' % ('NAME','SIZE','MODIFIED'))
+    
+    for model in sorted_models:
+        name = model.get('model', 'unknown')
+        model_id = model.get('id', 'unknown')
+        size_bytes = model.get('size', 0)
+        size_mb = naturalsize(size_bytes)
+        modified = model.get('modified_at', 'N/A')
+        print(f'%-64s %-12s %20s' % (name, size_mb, modified))
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='List Ollama models with sorting options.')
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-n', '--name', action='store_true', help='Sort models by name')
+    group.add_argument('-s', '--size', action='store_true', help='Sort models by size')
+    group.add_argument('-d', '--date', action='store_true', help='Sort models by modified date')
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+    sort_by = 'size' if args.size else 'name'
+    models = fetch_models()
+    display_models(models, sort_by=sort_by)
+
+if __name__ == '__main__':
+    main()
